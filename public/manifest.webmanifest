@@ -1,0 +1,9 @@
+{
+  "name": "MstrMnd — Crack the Number",
+  "short_name": "MstrMnd",
+  "description": "A fast, configurable number-code guessing game.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f2efe7",
+  "theme_color": "#151a16"
+}

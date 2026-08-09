@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#151a16"><meta name="apple-mobile-web-app-capable" content="yes">
+  <title>MstrMnd — Crack the Number</title><meta name="description" content="A configurable number-code guessing game.">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main><section class="shell">
+  <header><i>M</i><div><small>THE NUMBER GAME</small><h1>MstrMnd</h1></div><button id="new">New game</button></header>
+  <section class="rules"><div><b id="rule">Crack the hidden 5-digit number.</b><span><em>+</em> right place &nbsp; <strong>−</strong> wrong place</span></div><div class="settings"><label>Digits<select id="length"></select></label><label>Repeats<button id="repeats" role="switch" aria-checked="false"><span></span></button></label></div></section>
+  <section id="play"><form id="form"><label id="guess-label" for="guess">Guess #1</label><div class="entry"><input id="guess" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autofocus><button id="check">Check</button></div><p id="error">&nbsp;</p></form></section>
+  <section class="history"><div class="heading"><h2>Guesses</h2><span id="count">0 attempts</span></div><div id="list" class="empty"><i>?</i><p>Your clues will appear here.</p></div></section>
+</section><footer>Every game is generated on your device.</footer></main>
+<script src="app.js"></script></body></html>
