@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 
 type Guess = { value: string; exact: number; misplaced: number };
+type Theme = "system" | "light" | "dark";
 
 function makeSecret(length: number, repeats: boolean) {
   const digits = Array.from({ length: 10 }, (_, index) => String(index));
@@ -37,6 +38,7 @@ function scoreGuess(secret: string, guess: string) {
 export default function Home() {
   const [length, setLength] = useState(5);
   const [repeats, setRepeats] = useState(false);
+  const [theme, setTheme] = useState<Theme>("system");
   const [secret, setSecret] = useState("");
   const [guess, setGuess] = useState("");
   const [guesses, setGuesses] = useState<Guess[]>([]);
@@ -57,11 +59,13 @@ export default function Home() {
     const saved = localStorage.getItem("mstrmnd-settings");
     if (saved) {
       try {
-        const parsed = JSON.parse(saved) as { length?: number; repeats?: boolean };
+        const parsed = JSON.parse(saved) as { length?: number; repeats?: boolean; theme?: Theme };
         const savedLength = Math.min(10, Math.max(3, parsed.length ?? 5));
         const savedRepeats = Boolean(parsed.repeats);
+        const savedTheme = ["system", "light", "dark"].includes(parsed.theme ?? "") ? parsed.theme! : "system";
         setLength(savedLength);
         setRepeats(savedRepeats);
+        setTheme(savedTheme);
         setSecret(makeSecret(savedLength, savedRepeats));
         return;
       } catch { /* start with defaults */ }
@@ -70,8 +74,22 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (secret) localStorage.setItem("mstrmnd-settings", JSON.stringify({ length, repeats }));
-  }, [length, repeats, secret]);
+    if (secret) localStorage.setItem("mstrmnd-settings", JSON.stringify({ length, repeats, theme }));
+  }, [length, repeats, theme, secret]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const applyTheme = () => {
+      if (theme === "system") root.removeAttribute("data-theme");
+      else root.dataset.theme = theme;
+      const isDark = theme === "dark" || (theme === "system" && media.matches);
+      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? "#111512" : "#f2efe7");
+    };
+    applyTheme();
+    media.addEventListener("change", applyTheme);
+    return () => media.removeEventListener("change", applyTheme);
+  }, [theme]);
 
   useEffect(() => {
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => undefined);
@@ -115,6 +133,14 @@ export default function Home() {
             <span><b className="plus">+</b> right place&nbsp;&nbsp; <b className="minus">−</b> wrong place</span>
           </div>
           <div className="settings" aria-label="Game settings">
+            <label>
+              Theme
+              <select value={theme} onChange={(e) => setTheme(e.target.value as Theme)} aria-label="Color theme">
+                <option value="system">System</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+            </label>
             <label>
               Digits
               <select value={length} onChange={(e) => { const value = Number(e.target.value); setLength(value); newGame(value, repeats); }}>
