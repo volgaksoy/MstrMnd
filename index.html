@@ -8,8 +8,8 @@
 </head>
 <body>
 <main><section class="shell">
-  <header><i>M</i><div><small>THE NUMBER GAME</small><h1>MstrMnd</h1></div><button id="new">New game</button></header>
-  <section class="rules"><div><b id="rule">Crack the hidden 5-digit number.</b><span><em>+</em> right place &nbsp; <strong>−</strong> wrong place</span></div><div class="settings"><label>Theme<select id="theme" aria-label="Color theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label><label>Digits<select id="length"></select></label><label>Repeats<button id="repeats" role="switch" aria-checked="false"><span></span></button></label></div></section>
+  <header><i>M</i><div><small>THE NUMBER GAME</small><h1>MstrMnd</h1></div><div class="header-actions"><select id="theme" class="theme-select" aria-label="Color theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select><button id="new">New game</button></div></header>
+  <section class="rules"><div><b id="rule">Crack the hidden 5-digit number.</b><span><em>+</em> right place &nbsp; <strong>−</strong> wrong place</span></div><div class="settings"><label>Digits<select id="length"></select></label><label>Repeats<button id="repeats" role="switch" aria-checked="false"><span></span></button></label></div></section>
   <section id="play"><form id="form"><label id="guess-label" for="guess">Guess #1</label><div class="entry"><input id="guess" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autofocus><button id="check">Check</button></div><p id="error">&nbsp;</p></form></section>
   <section class="history"><div class="heading"><h2>Guesses</h2><span id="count">0 attempts</span></div><div id="list" class="empty"><i>?</i><p>Your clues will appear here.</p></div></section>
 </section><footer>Every game is generated on your device.</footer></main>

@@ -124,7 +124,14 @@ export default function Home() {
             <p className="eyebrow">THE NUMBER GAME</p>
             <h1>MstrMnd</h1>
           </div>
-          <button className="new-button" onClick={() => newGame()} aria-label="Start a new game">New game</button>
+          <div className="header-actions">
+            <select className="theme-select" value={theme} onChange={(e) => setTheme(e.target.value as Theme)} aria-label="Color theme">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <button className="new-button" onClick={() => newGame()} aria-label="Start a new game">New game</button>
+          </div>
         </header>
 
         <div className="rules">
@@ -133,14 +140,6 @@ export default function Home() {
             <span><b className="plus">+</b> right place&nbsp;&nbsp; <b className="minus">−</b> wrong place</span>
           </div>
           <div className="settings" aria-label="Game settings">
-            <label>
-              Theme
-              <select value={theme} onChange={(e) => setTheme(e.target.value as Theme)} aria-label="Color theme">
-                <option value="system">System</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-              </select>
-            </label>
             <label>
               Digits
               <select value={length} onChange={(e) => { const value = Number(e.target.value); setLength(value); newGame(value, repeats); }}>

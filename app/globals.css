@@ -16,7 +16,9 @@ header { display: flex; align-items: center; gap: 13px; padding: 22px 24px; bord
 .brand-mark { width: 44px; height: 44px; display: grid; place-items: center; background: var(--ink); color: var(--paper); font-family: Georgia, serif; font-size: 25px; border-radius: 4px; }
 .eyebrow { margin: 0 0 2px; font-size: 10px; font-weight: 800; letter-spacing: .19em; color: var(--muted); }
 h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 27px; line-height: 1; letter-spacing: -.03em; }
-.new-button { margin-left: auto; border: 1px solid var(--ink); color: var(--ink); background: transparent; padding: 9px 13px; border-radius: 3px; font-size: 13px; font-weight: 750; }
+.header-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.theme-select { min-width: 84px; }
+.new-button { border: 1px solid var(--ink); color: var(--ink); background: transparent; padding: 9px 13px; border-radius: 3px; font-size: 13px; font-weight: 750; white-space: nowrap; }
 .new-button:hover { background: var(--ink); color: var(--card); }
 .rules { display: flex; justify-content: space-between; gap: 22px; padding: 20px 24px; border-bottom: 1px solid var(--line); background: var(--rules); }
 .rule-copy { display: grid; gap: 7px; font-size: 13px; }
@@ -62,4 +64,6 @@ footer { width: min(680px, 100%); margin: 15px auto 0; color: #858980; text-alig
   .settings { width: 100%; justify-content: space-between; }
   .input-row { grid-template-columns: 1fr; }
   .input-row button { padding: 14px; }
+  .theme-select { min-width: 76px; width: 76px; }
+  .new-button { padding-inline: 10px; }
 }
